@@ -1,0 +1,61 @@
+<div class="col-sm-3 col-xs-12">
+    <input class="form-control crumbs-form-control" ng-model="vm.flyerEditTemplate.name" type="text"
+           placeholder="Template name">
+    <form ng-repeat="tag in vm.flyerEditTemplate.tags">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.flyerEditTemplate.tags, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <input class="form-control crumbs-form-control" ng-model="tag.name" type="text" placeholder="Enter tag">
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+             ng-click="vm.addElement(vm.flyerEditTemplate.tags)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a tag</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <fancy-select
+        header-text="Template owner"
+        allow-empty="false"
+        value="vm.flyerEditTemplate.owner.party.PartyRoleID"
+        text="'Template owner'"
+        items="vm.relationships">
+    </fancy-select>
+    <form ng-repeat="tag in vm.flyerEditTemplate.shares">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.flyerEditTemplate.shares, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <fancy-select
+                header-text="Select share"
+                allow-empty="false"
+                value="tag.party.PartyRoleID"
+                text="'Select share'"
+                items="vm.relationships">
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+             ng-click="vm.addElement(vm.flyerEditTemplate.shares)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a share</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <div class="checkbox crumbs-form-control" style="border-bottom-width: 0px !important;">
+        <label>
+            <input type="checkbox" ng-model="vm.flyerEditTemplate.canUseEdit"><span style="padding-left:5px">Anyone can use or edit</span>
+        </label>
+    </div>
+</div>
+<div class="col-sm-9 col-xs-12">
+    <input type="file" ngf-select="vm.uploadFlyerFile($files)" />
+    <div style="height:15px"></div>
+</div>
+<div class="clearfix"></div>

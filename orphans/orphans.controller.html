@@ -1,0 +1,8 @@
+<ion-list can-swipe="true" ng-repeat="orphan in vm.orphans">
+    <ion-item class="item item-icon-left">
+        <i class="icon icon-user"></i>
+        <h2 data-ng-if="orphan.companyName && orphan.companyName.length > 0">{{ orphan.companyName }}</h2>
+        <h2 data-ng-if="!orphan.compnayName || orphan.compnayName.length == 0">{{ orphan.firstname }} {{orphan.lastname}}</h2>
+        <ion-option-button class="button button-calm" ng-click="vm.link(orphan)"> Link </ion-option-button>
+    </ion-item>
+</ion-list>

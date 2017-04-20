@@ -1,0 +1,95 @@
+<div data-ng-show="$root.rolesMode == 1">
+    <div class="col-xs-12"><h4>Users</h4></div>
+    <ion-list can-swipe="false" ng-repeat="user in vm.users">
+        <ion-item id="row_user_{{user.iD}}" class="item item-icon-left"
+                  on-swipe-left="vm.swipeLeft(user, user.iD)" on-swipe-right="vm.swipeRight(user, user.iD)">
+            <i class="icon icon-user"></i>
+            <h2>{{user.username}}</h2>
+            <ion-option-button class="button button-calm btn-crumbs-disable"  ng-if="!vm.editMode && !user.disabled && !user.rolesMode"  ng-click="vm.disableUser(user, true)"> Disable
+            </ion-option-button>
+            <ion-option-button class="button button-balanced" ng-if="!vm.editMode"
+                               ng-click="vm.initEditMode(user)"> Edit
+            </ion-option-button>
+            <ion-option-button class="button button-assertive" ng-if="user.editMode && vm.editMode"
+                               ng-click="vm.cancelAction(user)"> Cancel
+            </ion-option-button>
+            <ion-option-button class="button button-balanced" ng-if="user.editMode && vm.editMode"
+                               ng-click="vm.saveUserData(user)"> Save
+            </ion-option-button>
+        </ion-item>
+        <ion-item class="item" ng-if="user.editMode && vm.editMode">
+            <div ng-include="'users/users-details.view.html'"></div>
+        </ion-item>
+    </ion-list>
+    <ion-list can-swipe="false">
+        <ion-item class="item" style="padding-left: 0px; border-bottom-width: 0px;">
+            <btn class="fa fa-plus-circle fa-lg pl10" style="color:green;line-height:22px;padding-right:10px" ng-click="vm.initAddNewMode()"></btn>
+            <span style="color:green">add a user</span>
+            <table style="position: absolute;right: 0;top:0;" ng-if="vm.addNewMode">
+                <tr>
+                    <td>
+                        <button style="height: 55px;" class="button button-balanced btn-crumbs" data-ng-if="vm.addNewMode"
+                                ng-click="vm.saveNewUser()"> Save
+                        </button>
+                    </td>
+                    <td>
+                        <button style="height: 55px;" class="button button-assertive btn-crumbs" data-ng-if="vm.addNewMode"
+                                ng-click="vm.closeEditRolesMode()"> Cancel
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </ion-item>
+        <ion-item class="item" ng-if="vm.addNewMode">
+            <div ng-include="'users/users-details.view.html'"></div>
+        </ion-item>
+    </ion-list>
+</div>
+<div data-ng-show="$root.rolesMode == 2">
+    <div class="col-xs-12"><h4>Permissions</h4></div>
+    <ion-list can-swipe="true" ng-repeat="perm in vm.permissions">
+        <ion-item class="item item-icon-left">
+            <!--<i class="icon icon-badge"></i>-->
+            <i class="icon fa fa-database fa-2x"></i>
+            <h2>{{perm.name}}</h2>
+            <ion-option-button class="button button-balanced" ng-if="perm.state == 1" ng-click="vm.loadPermissionTypes(perm)"> Edit </ion-option-button>
+            <ion-option-button class="button button-assertive" ng-if="perm.state == 2" ng-click="vm.closePermissionTypes(perm)"> Cancel </ion-option-button>
+            <ion-option-button class="button button-balanced" ng-if="perm.state == 2" ng-click="vm.savePermissionTypes(perm)"> Save  </ion-option-button>
+        </ion-item>
+        <ion-item class="item" ng-if="perm.state == 2">
+            <table class="table table-responsive table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Active</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in perm.values">
+                    <td>{{item.iD}}</td>
+                    <td>{{item.name}}</td>
+                    <td> <i class="fa cp" ng-class="item.active ? 'fa-check-square-o' : 'fa-square-o'"></i> </td>
+                </tr>
+                <tr data-ng-repeat="item in perm.newValues">
+                    <td>{{item.iD}}</td>
+                    <td>{{item.name}}</td>
+                    <td> <i class="fa cp" ng-class="item.active ? 'fa-check-square-o' : 'fa-square-o'"  data-ng-click="item.active = !item.active"></i> </td>
+                </tr>
+                <tr data-ng-show="perm.newType">
+                    <td></td>
+                    <td>
+                        <input type="text" placeholder="Enter name" data-ng-model="perm.newType.name" style="width: 100%;" />
+                    </td>
+                    <td>
+                        <i class="fa cp" ng-class="perm.newType.active ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="perm.newType.active = !perm.newType.active"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <btn class="fa fa-plus-circle fa-lg pl10" style="color:green;line-height:22px;padding-right:10px" ng-click="vm.addNewPermissionType(perm)"></btn><span style="color:green">add a type</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </ion-item>
+    </ion-list>
+</div>

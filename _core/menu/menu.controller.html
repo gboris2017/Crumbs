@@ -1,0 +1,5 @@
+<ion-tabs class="tabs-icon-top" ng-controller="MenuController as menu" style="height: 55px;">
+    <ion-tab title="{{state.label}}" icon-on="{{state.icon}}" icon-off="{{state.icon}}"
+             ng-repeat="state in menu.menu" ng-click="menu.changeState(state)">
+    </ion-tab>
+</ion-tabs>

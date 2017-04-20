@@ -1,0 +1,59 @@
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <fancy-select id="campaignList"
+        header-text="Select list"
+        allow-empty="true"
+        value="vm.editCampaign.list"
+        text="'Select list'"
+        items="vm.lists">
+    </fancy-select>
+    <div  data-ng-click="vm.runCampaignList()" style="cursor: pointer;">
+        <div style="float:left;color:green;">
+            <span class="fa fa-caret-right fa-2x"></span>
+        </div>
+        <div style="padding-left: 30px; padding-top: 2px; color: green;">
+            <span>run my list</span>
+        </div>
+    </div>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <fancy-select
+        header-text="Delivery method"
+        allow-empty="true"
+        value="vm.editCampaign.deliveryMethod"
+        text="'Delivery method'"
+        items="vm.deliveryMethods">
+    </fancy-select>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <fancy-select
+        header-text="Template of Job"
+        allow-empty="true"
+        value="vm.editCampaign.template"
+        text="'Template of Job'"
+        items="vm.templates">
+    </fancy-select>
+    <div data-ng-click="vm.previewCampaign()" style="cursor: pointer">
+        <div style="float:left;color:green;">
+            <span class="fa fa-caret-right fa-2x"></span>
+        </div>
+        <div style="padding-left: 30px; padding-top: 2px; color: green;">
+            <span>preview template</span>
+        </div>
+    </div>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <div ion-datetime-picker ng-model="vm.editCampaign.startDate">
+        <input class="crumbs-form-control" type="text" placeholder="Start date" value="{{vm.editCampaign.startDate | date: 'yyyy-MM-dd HH:mm'}}"/>
+    </div>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <input class="crumbs-form-control" type="text" placeholder="Campaign name" ng-model="vm.editCampaign.name"  style="height:34px">
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-click="vm.saveCampaign()" style="margin-top: 5px;">
+    <div style="float:left;color:green;">
+        <span class="fa fa-save fa-2x"></span>
+    </div>
+    <div style="padding-left: 30px; padding-top: 2px; color: green;">
+        <span>save my campaign</span>
+    </div>
+</div>

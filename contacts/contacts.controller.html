@@ -1,0 +1,67 @@
+<ion-list can-swipe="false" ng-repeat="contact in vm.contacts">
+    <ion-item class="item item-icon-left" id="row_contact_{{contact.PartyID}}"
+              on-swipe-left="vm.swipeLeft(contact, contact.PartyID)" on-swipe-right="vm.swipeRight(contact, contact.PartyID)">
+        <i data-ng-if="contact.logo == undefined" class="icon icon-user"></i>
+        <img class="icon" style="height: 32px; padding-top: 0px; margin-top: 12px;width: 32px;" data-ng-if="contact.logo != undefined" ng-src="{{contact.logo}}" />
+        <h2>{{ contact.PartyName }} </h2>
+        <p>{{ contact.PartyRoleTypeName }}</p>
+        <span data-ng-show="contant.AccreditationStatus != null" style="position: absolute;color:green; top:35%;left:30%;font-size:18px;">{{contant.AccreditationStatus}}</span>
+        <ion-option-button class="button button-calm" ng-if="!vm.editMode" ng-click="vm.initEditMode(contact)"> Edit </ion-option-button>
+        <ion-option-button class="button button-balanced" ng-if="!vm.editMode" ng-click="vm.contact(contact)"> Contact </ion-option-button>
+        <ion-option-button class="button button-assertive" ng-if="vm.editMode || (contact.contactMode && vm.contactMode)" ng-click="vm.closeEditMode()"> Cancel </ion-option-button>
+        <ion-option-button class="button button-balanced" ng-if="vm.editMode" ng-click="vm.saveContact(contact)"> Save </ion-option-button>
+    </ion-item>
+    <ion-item class="item" ng-if="contact.editMode && vm.editMode">
+        <div ng-include="'contacts/contact-details.view.html'"></div>
+    </ion-item>
+</ion-list>
+
+<ion-list delegate-handle="create-list" can-swipe="false">
+    <ion-item class="item" style="padding-left: 0px; border-bottom-width: 0px;">
+        <btn class="fa fa-plus-circle fa-lg pl10" style="color:green;line-height:22px;padding-right:10px" ng-click="vm.initAddNewMode()"></btn><span style="color:green">add a contact</span>
+        <table style="position: absolute;right: 0;top:0;" data-ng-if="vm.addNewMode">
+            <tr>
+                <td>
+                    <button style="height: 55px;" class="button button-balanced btn-crumbs" data-ng-if="vm.addNewMode" ng-click="vm.saveNewContact()"> Save </button>
+                </td>
+                <td>
+                    <button style="height: 55px;" class="button button-assertive btn-crumbs" data-ng-if="vm.addNewMode" ng-click="vm.closeAddNewMode()"> Cancel </button>
+                </td>
+            </tr>
+        </table>
+    </ion-item>
+    <ion-item class="item" ng-if="vm.addNewMode">
+        <div ng-include="'contacts/contact-details.view.html'"></div>
+    </ion-item>
+</ion-list>
+
+<script id="contact-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">Contacts</h1>
+        </ion-header-bar>
+        <ion-content>
+            <div class="col-sm-12 text-left p0">
+                <table class="width100" style="border: 1px solid #e5e5e5">
+                    <tr style="border-bottom: 1px solid #e5e5e5" data-ng-show="vm.contactContact.MobilePhoneNumner && vm.contactContact.MobilePhoneNumner.length > 0">
+                        <td class="p10">{{vm.contactContact.MobilePhoneNumner}}</td>
+                        <td class="p10 text-right"><i class="fa fa-align-justify" style="margin-right: 10px;"></i><i class="fa fa-phone"></i></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e5e5" data-ng-show="vm.contactContact.WorkPhoneNumner && vm.contactContact.WorkPhoneNumner.length > 0">
+                        <td class="p10">{{vm.contactContact.WorkPhoneNumner}}</td>
+                        <td class="p10 text-right"><i class="fa fa-phone"></i></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e5e5" data-ng-show="vm.contactContact.EmailAddress && vm.contactContact.EmailAddress.length > 0">
+                        <td class="p10">{{vm.contactContact.EmailAddress}}</td>
+                        <td class="p10 text-right"><i class="fa fa-envelope"></i></td>
+                    </tr>
+                </table>
+                <p style="padding: 15px;" data-ng-show="(!vm.contactContact.MobilePhoneNumner || vm.contactContact.MobilePhoneNumner == null)
+                                && (!vm.contactContact.WorkPhoneNumner || vm.contactContact.WorkPhoneNumner == null)
+                                && (!vm.contactContact.EmailAddress || vm.contactContact.EmailAddress == null)">
+                    No contact info
+                </p>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>

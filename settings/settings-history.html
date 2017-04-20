@@ -1,0 +1,22 @@
+<ion-list can-swipe="false">
+    <ion-item class="item" data-ng-repeat="item in vm.importsList" style="padding: 10px;">
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 30px;" class="vam tac">
+                    <span class="media-object pull-left fa fa-times fa-2x" style="padding-top: 5px;color:red;"
+                          ng-if="!item.success"></span>
+                    <span class="media-object pull-left fa fa-check fa-2x" style="padding-top: 5px;color:green;"
+                          ng-if="item.success"></span>
+                </td>
+                <td class="vam text-left">
+                    <p class="bm0" style="color: black;">{{vm.formatDate(item.importTimestamp)}}</p>
+                    <p class="bm0" style="color: black;">{{item.importContact.name}}</p>
+                </td>
+                <td class="text-right">
+                    <p style="color: black;">{{item.info}}</p>
+                    <p style="color: blue;cursor: pointer;" ng-if="!item.success">View errors</p>
+                </td>
+            </tr>
+        </table>
+    </ion-item>
+</ion-list>

@@ -1,0 +1,119 @@
+<div class="col-sm-3 col-xs-12">
+    <input class="form-control crumbs-form-control" ng-model="vm.smsEditTemplate.name" type="text"
+           placeholder="Template name">
+    <form ng-repeat="tag in vm.smsEditTemplate.tags">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.smsEditTemplate.tags, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <input class="form-control crumbs-form-control" ng-model="tag.name" type="text" placeholder="Enter tag">
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+             ng-click="vm.addElement(vm.smsEditTemplate.tags)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a tag</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <fancy-select
+        header-text="Template owner"
+        allow-empty="false"
+        value="vm.smsEditTemplate.owner.party.PartyRoleID"
+        text="'Template owner'"
+        items="vm.relationships">
+    </fancy-select>
+    <form ng-repeat="tag in vm.smsEditTemplate.shares">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.smsEditTemplate.shares, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <fancy-select
+                header-text="Select share"
+                allow-empty="false"
+                value="tag.party.PartyRoleID"
+                text="'Select share'"
+                items="vm.relationships">
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addElement(vm.smsEditTemplate.shares)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a share</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <div class="checkbox crumbs-form-control" style="border-bottom-width: 0px !important;">
+        <label>
+            <input type="checkbox" ng-model="vm.smsEditTemplate.canUseEdit"><span style="padding-left:5px">Anyone can use or edit</span>
+        </label>
+    </div>
+</div>
+<div class="col-sm-9 col-xs-12">
+    <form ng-repeat="tag in vm.smsEditTemplate.phones">
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"  ng-click="vm.removeElement(vm.smsEditTemplate.phones, tag.index)"></btn>
+        </div>
+        <div class="col-xs-3 p0505 form-group bm0">
+            <fancy-select
+                    header-text="Select type"
+                    allow-empty="false"
+                    value="tag.type"
+                    text="'Select type'"
+                    items="vm.phonesTypesList">
+            </fancy-select>
+        </div>
+
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 1">
+            <input class="form-control crumbs-form-control" ng-model="tag.phoneNumber" type="text" placeholder="Phone number">
+        </div>
+
+        <div class="col-xs-3 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Email Type"
+                    allow-empty="false"
+                    value="tag.phoneType"
+                    text="'Phone type'"
+                    items="vm.phoneTypes">
+            </fancy-select>
+        </div>
+        <div class="col-xs-2 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Location"
+                    allow-empty="false"
+                    value="tag.location"
+                    text="'Location'"
+                    items="vm.locationTypes">
+            </fancy-select>
+        </div>
+        <div class="col-xs-3 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Communication"
+                    allow-empty="false"
+                    value="tag.communication"
+                    text="'Communication'"
+                    items="vm.communicationTypes">
+            </fancy-select>
+        </div>
+
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 3">
+            <input class="form-control crumbs-form-control" ng-model="tag.phoneNumber" type="text" placeholder="Phone number property">
+        </div>
+
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addPhone()"></btn>
+    </div>
+    <div class="col-xs-11 p0505"><span style="color:green">add a phone number</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+
+    <trix-editor angular-trix ng-model="vm.smsEditTemplate.subject" style="height:100px"></trix-editor>
+    <div style="height:15px"></div>
+</div>
+<div class="clearfix"></div>

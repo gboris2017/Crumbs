@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="crumbs" ng-cloak ng-strict-di>
+<head>
+    <title ng-bind="'Crumbs' + $state.current.title">Crumbs</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/css/vendor.css" type="text/css">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+</head>
+<body ng-class="$state.current.name|expandState">
+<ion-side-menus>
+    <ion-side-menu side="left" ng-controller="CommonController">
+        <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
+            <ion-slide-page ng-if="$root.showTab('deals')">
+                <ion-content><div ng-include="'common/common-deals.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('notes')">
+                <ion-content><div ng-include="'common/common-notes.html'" style="padding: 0px 15px 15px;"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('files')">
+                <ion-content><div ng-include="'common/common-files.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('accreditation')" ng-init="$root.initAccreditationView()">
+                <ion-content><div ng-include="'common/common-accreditation.html'" style="padding: 15px;"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('branding')" ng-init="$root.initBrandingView()">
+                <ion-content><div ng-include="'common/common-branding.html'" style="padding: 15px;"></div> </ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('accounts')" ng-init="$root.loadAccounts()">
+                <ion-content><div ng-include="'common/common-accounts.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('contacts')" ng-init="$root.loadContacts()">
+                <ion-content><div ng-include="'common/common-contacts.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('listsaccounts')" ng-init="$root.loadListsAccounts()">
+                <ion-content><div ng-include="'common/common-listsaccounts.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('listscontacts')" ng-init="$root.loadListsContacts()">
+                <ion-content><div ng-include="'common/common-listscontacts.html'"></div></ion-content>
+            </ion-slide-page>
+
+            <ion-slide-page ng-if="$root.showTab('templatesemails')" ng-init="$root.loadEmailTemplates()">
+                <ion-content><div ng-include="'common/common-templatesemails.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('templatessms')" ng-init="$root.loadSmsTemplates()">
+                <ion-content><div ng-include="'common/common-templatessms.html'"></div></ion-content>
+            </ion-slide-page>
+            <ion-slide-page ng-if="$root.showTab('templatesflyers')" ng-init="$root.loadFlyerTemplates()">
+                <ion-content><div ng-include="'common/common-templatesflyers.html'"></div></ion-content>
+            </ion-slide-page>
+
+            <ion-slide-page ng-if="$root.showTab('relosusers')">
+                <ion-content><div ng-include="'common/common-userroles.html'"></div></ion-content>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-side-menu>
+    <ion-side-menu-content style=" height: 100% !important;">
+        <ion-pane style=" height: 100% !important;">
+            <ion-header-bar class="bar-stable">
+                <h1 class="title">CRUMBS</h1>
+            </ion-header-bar>
+            <ion-content overflow-scroll="true" scroll="true" class="has-header" class="content" style="overflow-y: auto; margin-bottom: 55px;">
+                <div ui-view></div>
+            </ion-content>
+            <div ng-include="'_core/menu/menu.controller.html'"></div>
+        </ion-pane>
+    </ion-side-menu-content>
+</ion-side-menus>
+
+
+<script type="text/javascript">
+    var CONFIG = {
+        "api": {
+            "crumbs": "http://localhost:3000"
+        },
+        "version": "1.0.0"
+    };
+</script>
+<script type="text/javascript" src="/js/libs-min.js"></script>
+<!--<script type="text/javascript" src="/js/all-min.js"></script>-->
+
+<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="/js/_core/core.module.js"></script>
+<script type="text/javascript" src="/js/_core/current-state.directive.js"></script>
+<script type="text/javascript" src="/js/_core/directives.js"></script>
+<script type="text/javascript" src="/js/_core/services.js"></script>
+
+<script type="text/javascript" src="/js/_core/menu/menu.controller.js"></script>
+<script type="text/javascript" src="/js/_core/util/helper.service.js"></script>
+<script type="text/javascript" src="/js/_core/util/shared.service.js"></script>
+
+<script type="text/javascript" src="/js/accounts/accounts.module.js"></script>
+<script type="text/javascript" src="/js/accounts/accounts.controller.js"></script>
+<script type="text/javascript" src="/js/accounts/accounts.service.js"></script>
+
+<script type="text/javascript" src="/js/campaigns/campaigns.module.js"></script>
+<script type="text/javascript" src="/js/campaigns/campaigns.controller.js"></script>
+<script type="text/javascript" src="/js/campaigns/campaigns.service.js"></script>
+
+<script type="text/javascript" src="/js/common/common.controller.js"></script>
+<script type="text/javascript" src="/js/common/slider.controller.js"></script>
+
+<script type="text/javascript" src="/js/contacts/contacts.module.js"></script>
+<script type="text/javascript" src="/js/contacts/contacts.controller.js"></script>
+<script type="text/javascript" src="/js/contacts/contacts.service.js"></script>
+
+<script type="text/javascript" src="/js/lists/lists.module.js"></script>
+<script type="text/javascript" src="/js/lists/lists.controller.js"></script>
+<script type="text/javascript" src="/js/lists/lists.service.js"></script>
+
+<script type="text/javascript" src="/js/orphans/orphans.module.js"></script>
+<script type="text/javascript" src="/js/orphans/orphans.controller.js"></script>
+<script type="text/javascript" src="/js/orphans/orphans.service.js"></script>
+
+<script type="text/javascript" src="/js/settings/settings.module.js"></script>
+<script type="text/javascript" src="/js/settings/settings.controller.js"></script>
+
+<script type="text/javascript" src="/js/templates/templates.module.js"></script>
+<script type="text/javascript" src="/js/templates/templates.controller.js"></script>
+<script type="text/javascript" src="/js/templates/templates.service.js"></script>
+
+<script type="text/javascript" src="/js/users/users.module.js"></script>
+<script type="text/javascript" src="/js/users/users.controller.js"></script>
+<script type="text/javascript" src="/js/users/users.service.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+
+    <div class="col-sm-1 col-xs-2 text-center">
+        <i data-ng-if="vm.editAccount.logo == undefined" class="fa fa-user fa-4x"></i>
+        <img width="64" height="64" data-ng-if="vm.editAccount.logo != undefined" ng-src="{{vm.editAccount.logo}}" />
+        <br/>
+        <input type="file" ngf-select="vm.imageUpload($files)" style="display:none" id="fileInputAcc" name="filedataAcc" />
+        <a href="" data-ng-click="vm.triggerUpload()">Edit</a>
+    </div>
+    <div class="col-sm-3 col-xs-10">
+        <!--<fancy-select-->
+            <!--header-text="Australian company"-->
+            <!--allow-empty='false'-->
+            <!--value="vm.editAccount.auscompany"-->
+            <!--text="'Australian company'"-->
+            <!--items="vm.companies"-->
+            <!--search-box='false'>-->
+        <!--</fancy-select>-->
+        <input class="form-control crumbs-form-control" ng-model="vm.editAccount.company.companyName" type="text" placeholder="Company name">
+        <input class="form-control crumbs-form-control" ng-model="vm.editAccount.company.preferredName" type="text" placeholder="Prefered name">
+        <input class="form-control crumbs-form-control" ng-model="vm.editAccount.company.aBN" type="text" placeholder="ABN">
+
+        <div ion-datetime-picker date ng-model="vm.editAccount.company.aBNRegistered" style="font-size: 33px; border-bottom: 1px solid #ddd!important;margin-bottom: 15px;">
+            <i class="icon ion-ios-calendar-outline positive" style="float: left;"></i>
+            <div data-ng-if="vm.editAccount.company.aBNRegistered" style="font-size: 16px;padding: 8px 0 0 30px;">{{vm.editAccount.company.aBNRegistered | date: 'yyyy-MM-dd'}}</div>
+            <div data-ng-if="!vm.editAccount.company.aBNRegistered" style="font-size: 16px;padding: 8px 0 0 30px;color:#ddd;">ABN Registered Date</div>
+            <div class="clearfix"></div>
+        </div>
+
+        <input class="form-control crumbs-form-control" ng-model="vm.editAccount.company.aCN" type="text" placeholder="ACN">
+
+        <form ng-repeat="role in vm.editAccount.partyRolesList">
+            <div class="col-sm-2 col-xs-1 p0505">
+                <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"  ng-click="vm.removePartyRole(role.index)"></btn>
+            </div>
+            <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+                <fancy-select
+                    header-text="Select Party Role" allow-empty='false'  value="role.type" text="'Select Party Role'" items="vm.partyRoles" callback="vm.searchPartyRoleNameAccount">
+                </fancy-select>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+                 ng-click="vm.addPartyRole()"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a party role</span></div>
+        <div class="clearfix"></div>
+        <div style="height: 15px;"></div>
+
+        <div data-ng-repeat="role in vm.editAccount.partyRolesList">
+            <p data-ng-if="role.PartyRoleType && role.PartyRoleType.name"><strong>Role: {{role.PartyRoleType.name}}</strong></p>
+            <p data-ng-if="!role.PartyRoleType || !role.PartyRoleType.name"><strong>Role: {{role.PartyRoleType.name}}</strong></p>
+
+            <form ng-repeat="ccc in role.ownerList">
+                <div class="col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+                    <fancy-select
+                            header-text="Owner" allow-empty="false" value="ccc.party.PartyRoleID"  text="'Owner'" items="vm.relationships" search-box="true">
+                    </fancy-select>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+            <form ng-repeat="sh in role.sharesList">
+                <div class="col-xs-1 col-sm-2 p0505">
+                    <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="vm.removeShare(role.sharesList, sh.index)"></btn>
+                </div>
+                <div class="col-xs-11 col-sm-10 p0505 form-group bm0" style="padding-right: 0px">
+                    <fancy-select
+                            header-text="Share" allow-empty='false'  value="sh.party.PartyRoleID" text="'Share'" items="vm.relationships" search-box='true'>
+                    </fancy-select>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+            <div class="col-sm-2 col-xs-1 p0505">
+                <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addShare(role.sharesList)"></btn>
+            </div>
+            <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a share</span></div>
+            <div class="clearfix"></div>
+            <br>
+            <form ng-repeat="ccc in role.primaryContactList">
+                <div class="col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+                    <fancy-select
+                            header-text="Primary contact" allow-empty="false" value="ccc.party.PartyRoleID"  text="'Primary contact'" items="vm.relationships" search-box="true">
+                    </fancy-select>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+            <br>
+        </div>
+    </div>
+    <div class="col-sm-8 col-xs-12">
+        <!--addresses-->
+        <form ng-repeat="addr in vm.editAccount.addressesList">
+            <div class="col-sm-1 col-xs-1 p0505">
+                <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="vm.removeAddress(addr.index)"></btn>
+            </div>
+            <div class="col-sm-3 col-xs-5 p0505 form-group bm0">
+                <fancy-select
+                        header-text="Select address type"  allow-empty='false'  value="addr.type"  text="'Select...'"  items="vm.addressTypes">
+                </fancy-select>
+            </div>
+            <div class="col-sm-8 col-sm-offset-0 col-xs-11 col-xs-offset-1 p0505 form-group bm0">
+                <fancy-select
+                        header-text="Address" allow-empty='false' value="addr.text" text="'Address'" items="vm.searchAddresses"  search-box="true"  show-list="false"
+                        allow-custom="true" index="{{addr.index}}" callback="setCustomAddress">
+                </fancy-select>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addAddress()"></btn>
+        </div>
+        <div class="col-xs-11 p0505"><span style="color:green">add address</span></div>
+        <div class="clearfix"></div>
+        <br>
+
+        <!--phone number-->
+        <form ng-repeat="phone in vm.editAccount.phonesList">
+            <div class="col-sm-1 col-xs-1 p0505">
+                <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                     ng-click="vm.removePhone(phone.index)"></btn>
+            </div>
+            <div class="col-sm-3 col-xs-5 p0505 form-group bm0">
+                <fancy-select
+                    header-text="Select type"
+                    allow-empty="false"
+                    value="phone.type"
+                    text="'Select type'"
+                    items="vm.phoneTypes"
+                    search="true">
+                </fancy-select>
+            </div>
+            <div class="col-sm-8 col-sm-offset-0 col-xs-11 col-xs-offset-1 p0505 form-group bm0">
+                <input class="form-control crumbs-form-control" ng-model="phone.text" type="text"
+                       placeholder="Enter phone number">
+            </div>
+            <div class="clearfix"></div>
+        </form>
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addPhone()"></btn>
+        </div>
+        <div class="col-xs-11 p0505"><span style="color:green">add phone number</span></div>
+        <div class="clearfix"></div>
+        <br>
+        <!--email address-->
+        <div ng-repeat="email in vm.editAccount.emailsList">
+            <div class="col-sm-1 col-xs-1 p0505">
+                <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                     ng-click="vm.removeEmail(email.index)"></btn>
+            </div>
+            <div class="col-sm-3 col-xs-5 p0505 form-group bm0">
+                <fancy-select
+                    header-text="Select type"
+                    allow-empty="false"
+                    value="email.type"
+                    text="'Select type'"
+                    items="vm.emailTypes"
+                    search="false">
+                </fancy-select>
+            </div>
+            <div class="col-sm-8 col-sm-offset-0 col-xs-11 col-xs-offset-1 p0505 form-group bm0">
+                <input validate-email required class="form-control crumbs-form-control" ng-model="email.text" type="email" placeholder="Enter email address">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addEmail()"></btn>
+        </div>
+        <div class="col-xs-11 p0505"><span style="color:green">add email address</span></div>
+        <div class="clearfix"></div>
+        <br>
+        <!--social-->
+        <form ng-repeat="social in vm.editAccount.socialsList">
+            <div class="col-sm-1 col-xs-1 p0505">
+                <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                     ng-click="vm.removeSocial(social.index)"></btn>
+            </div>
+            <div class="col-sm-3 col-xs-5 p0505 form-group bm0">
+                <fancy-select
+                    header-text="Select type"
+                    allow-empty="false"
+                    value="social.type"
+                    text="'Select type'"
+                    items="vm.socialTypes"
+                    search="false">
+                </fancy-select>
+            </div>
+            <div class="col-sm-8 col-sm-offset-0 col-xs-11 col-xs-offset-1 p0505 form-group bm0">
+                <input class="form-control crumbs-form-control" ng-model="social.text" type="text"
+                       placeholder="Enter social account link">
+            </div>
+            <div class="clearfix"></div>
+        </form>
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addSocial()"></btn>
+        </div>
+        <div class="col-xs-11 p0505"><span style="color:green">add social account</span></div>
+        <div class="clearfix"></div>
+        <br>
+        <!--relationships-->
+        <div data-ng-repeat="role in vm.editAccount.partyRolesList">
+            <p data-ng-if="role.PartyRoleType && role.PartyRoleType.name"><strong>Role: {{role.PartyRoleType.name}}</strong></p>
+            <p data-ng-if="!role.PartyRoleType || !role.PartyRoleType.name"><strong>Role: {{role.PartyRoleType.name}}</strong></p>
+            <form ng-repeat="rel in role.relationshipsList">
+                <div class="col-sm-1 col-xs-1 p0505">
+                    <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="vm.removeRelationship(role.relationshipsList, rel.index)"></btn>
+                </div>
+                <div class="col-sm-3 col-xs-5 p0505 form-group bm0">
+                    <fancy-select
+                            header-text="Select type" allow-empty="false" value="rel.type.RelationshipTypeID"  text="'Select type'" items="vm.relationshipTypes">
+                    </fancy-select>
+                </div>
+                <div class="col-sm-8 col-sm-offset-0 col-xs-8 col-xs-offset-1 p0505 form-group bm0">
+                    <fancy-select
+                            header-text="Select relationship" allow-empty="false" value="rel.party.PartyRoleID" text="'Select relationship'" items="vm.relationships" search-box="true">
+                    </fancy-select>
+                </div>
+                <!--<div class="col-sm-2 col-xs-3 p0505" style="padding-top:5px"><a>Go to contact</a></div>-->
+                <div class="clearfix"></div>
+            </form>
+            <div class="col-xs-1 p0505">
+                <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addRelationship(role.relationshipsList)"></btn>
+            </div>
+            <div class="col-xs-11 p0505"><span style="color:green">add relationship</span></div>
+            <div class="clearfix"></div>
+            <br>
+
+
+            <!--<form ng-repeat="ccc in role.ownerList">-->
+                <!--<div class="col-xs-11 p0505 form-group bm0" style="padding-right: 0px">-->
+                    <!--<fancy-select-->
+                            <!--header-text="Owner" allow-empty="false" value="ccc.party.PartyRoleID"  text="'Owner'" items="vm.relationships" search-box="true">-->
+                    <!--</fancy-select>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+            <!--</form>-->
+            <!--<form ng-repeat="sh in role.sharesList">-->
+                <!--<div class="col-xs-1 col-sm-2 p0505">-->
+                    <!--<btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="vm.removeShare(role.sharesList, sh.index)"></btn>-->
+                <!--</div>-->
+                <!--<div class="col-xs-11 col-sm-10 p0505 form-group bm0" style="padding-right: 0px">-->
+                    <!--<fancy-select-->
+                            <!--header-text="Share" allow-empty='false'  value="sh.party.PartyRoleID" text="'Share'" items="vm.relationships" search-box='true'>-->
+                    <!--</fancy-select>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+            <!--</form>-->
+            <!--<div class="col-sm-2 col-xs-1 p0505">-->
+                <!--<btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addShare(role.sharesList)"></btn>-->
+            <!--</div>-->
+            <!--<div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a share</span></div>-->
+            <!--<div class="clearfix"></div>-->
+            <!--<br>-->
+        </div>
+    </div>
+    <div class="clearfix"></div>
+<!--</div>-->

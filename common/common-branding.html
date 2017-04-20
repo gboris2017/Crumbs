@@ -1,0 +1,218 @@
+<div class="col-xs-12 text-center"><h4>Branding</h4></div>
+
+<div class="col-sm-6 col-xs-12">
+    <p class="text-left pt10">Documents branding:</p>
+</div>
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Branding type"
+        allow-empty="false"
+        value="$root.branding.documentBranding"
+        text="'Branding type'"
+        items="$root.brandingTypes"
+        search="false">
+    </fancy-select>
+</div>
+<div class="col-sm-6 col-xs-12">
+    <p class="text-left pt10">Online branding:</p>
+</div>
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Branding type"
+        allow-empty="false"
+        value="$root.branding.onlineBranding"
+        text="'Branding type'"
+        items="$root.brandingTypes"
+        search="false">
+    </fancy-select>
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Entity Information</h4>
+
+
+<div class="col-sm-6 col-xs-12">
+    <input class="form-control crumbs-form-control" type="text" placeholder="SPV Name" ng-model="$root.branding.spvName"
+           style="height:34px">
+</div>
+<div class="col-sm-6 col-xs-12">
+    <input class="form-control crumbs-form-control" type="text" placeholder="SPV ACN" ng-model="$root.branding.spvAcn"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Branch ID" ng-model="$root.branding.branchId"
+           style="height:34px">
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Customer Contact Information</h4>
+
+<div class="col-sm-6 col-xs-12">
+    <h5 class="text-left">Pre-Settlement (Sales)</h5>
+    <input class="form-control crumbs-form-control" type="text" placeholder="Australian Phone"
+           ng-model="$root.branding.preAustralianPhone"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="International Phone"
+           ng-model="$root.branding.preInternationalPhone"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Email Address"
+           ng-model="$root.branding.preEmailAddress"
+           style="height:34px">
+</div>
+<div class="col-sm-6 col-xs-12">
+    <h5 class="text-left">Post-Settlement (Service)</h5>
+    <input class="form-control crumbs-form-control" type="text" placeholder="Australian Phone"
+           ng-model="$root.branding.postAustralianPhone"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="International Phone"
+           ng-model="$root.branding.postInternationalPhone"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Email Address"
+           ng-model="$root.branding.postEmailAddress"
+           style="height:34px">
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Document Branding</h4>
+
+<div class="col-sm-6 col-xs-12">
+    <img data-ng-if="$root.branding.logo1 == undefined" ng-src="images/img1.jpg" width="100%">
+    <img data-ng-if="$root.branding.logo1 != undefined" ng-src="{{$root.branding.logo1}}" />
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <fancy-select
+        header-text="Logo alignment"
+        allow-empty="false"
+        value="$root.branding.logoAlignment"
+        text="'Logo alignment'"
+        items="$root.logoAlignments"
+        search="false">
+    </fancy-select>
+    <input type="file" ngf-select="$root.imageUpload($files, 1)" style="display:none" id="fileInput1" name="filedata1" />
+    <a class="btn" data-ng-click="$root.triggerUpload('fileInput1')">< Update logo</a>
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Pre-Settlement Footer (Sales)</h4>
+
+<div class="col-sm-6 col-xs-12">
+    <img data-ng-if="$root.branding.logo2 == undefined" ng-src="images/img1.jpg" width="100%">
+    <img data-ng-if="$root.branding.logo2 != undefined" ng-src="{{$root.branding.logo2}}" />
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Signature text line 1"
+           ng-model="$root.branding.signatureText1"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Signature text line 2"
+           ng-model="$root.branding.signatureText2"
+           style="height:34px">
+    <input type="file" ngf-select="$root.imageUpload($files, 2)" style="display:none" id="fileInput2" name="filedata2" />
+    <a class="btn" data-ng-click="$root.triggerUpload('fileInput2')">< Update signature</a>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Logo alignment"
+        allow-empty="false"
+        value="$root.branding.footerAlignment"
+        text="'Logo alignment'"
+        items="$root.logoAlignments"
+        search="false">
+    </fancy-select>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-sm-6 col-xs-12">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 1" ng-model="$root.branding.footerLine1Left"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 2" ng-model="$root.branding.footerLine2Left"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 3" ng-model="$root.branding.footerLine3Left"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 4" ng-model="$root.branding.footerLine4Left"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 5" ng-model="$root.branding.footerLine5Left"
+           style="height:34px">
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 1" ng-model="$root.branding.footerLine1"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 2" ng-model="$root.branding.footerLine2"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 3" ng-model="$root.branding.footerLine3"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 4" ng-model="$root.branding.footerLine4"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 5" ng-model="$root.branding.footerLine5"
+           style="height:34px">
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Post-Settlement Footer (Service)</h4>
+
+<div class="col-sm-6 col-xs-12">
+    <img data-ng-if="$root.branding.logo3 == undefined" ng-src="images/img1.jpg" width="100%">
+    <img data-ng-if="$root.branding.logo3 != undefined" ng-src="{{$root.branding.logo3}}" />
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Signature text line 1" ng-model="$root.branding.signatureText1Post"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Signature text line 2" ng-model="$root.branding.signatureText2Post"
+           style="height:34px">
+    <input type="file" ngf-select="$root.imageUpload($files, 3)" style="display:none" id="fileInput3" name="filedata3" />
+    <a class="btn" data-ng-click="$root.triggerUpload('fileInput3')">< Update signature</a>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Logo alignment"
+        allow-empty="false"
+        value="$root.branding.footerAlignmentPost"
+        text="'Logo alignment'"
+        items="$root.logoAlignments"
+        search="false">
+    </fancy-select>
+</div>
+<div class="clearfix"></div>
+<div class="col-sm-6 col-xs-12">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 1" ng-model="$root.branding.footerLine1LeftPost"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 2" ng-model="$root.branding.footerLine2LeftPost"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 3" ng-model="$root.branding.footerLine3LeftPost"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 4" ng-model="$root.branding.footerLine4LeftPost"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 5" ng-model="$root.branding.footerLine5LeftPost"
+           style="height:34px">
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 1" ng-model="$root.branding.footerLine1Post"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 2" ng-model="$root.branding.footerLine2Post"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 3" ng-model="$root.branding.footerLine3Post"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 4" ng-model="$root.branding.footerLine4Post"
+           style="height:34px">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Footer Line 5" ng-model="$root.branding.footerLine5Post"
+           style="height:34px">
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Online Services Branding</h4>
+
+<div class="col-sm-6 col-xs-12">
+    <img data-ng-if="$root.branding.logo4 == undefined" ng-src="images/img1.jpg" width="100%">
+    <img data-ng-if="$root.branding.logo4 != undefined" ng-src="{{$root.branding.logo4}}" />
+</div>
+<div class="col-sm-6 col-xs-12 text-left">
+    <input class="form-control crumbs-form-control" type="text" placeholder="Online Services URL" ng-model="$root.branding.servicesUrl"
+           style="height:34px">
+
+    <input type="file" ngf-select="$root.imageUpload($files, 4)" style="display:none" id="fileInput4" name="filedata4" />
+    <a class="btn" data-ng-click="$root.triggerUpload('fileInput4')">< Update logo</a>
+</div>
+<div class="clearfix"></div>
+

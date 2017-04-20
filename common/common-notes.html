@@ -1,0 +1,43 @@
+<div class="col-xs-12 text-center"><h4>Notes</h4></div>
+
+<div class="row text-left pb10" ng-class="{'bb1gray' : !$root.createMode}" style="padding-left: 0px;">
+    <div class="col-sm-8 col-xs-12 lh30" style="padding-left: 0px;">
+        <span class="label" ng-class="{ 'label-success-notes': $root.selectedType == 0, 'label-default' :$root.selectedType != 0}" style="margin:5px; float:left;" ng-click="$root.selectedType = 0">All</span>
+        <span class="label" ng-class="{ 'label-success-notes': $root.selectedType == t.id, 'label-default' :$root.selectedType != t.id}" style="margin:5px; float:left;" ng-click="$root.selectedType = t.id" ng-repeat="t in $root.notesTypes">{{t.name}}</span>
+    </div>
+    <div class="col-sm-4 col-xs-12 lh30" style="padding-right: 0px;">
+        <div class="add-file cp" style="padding-left:4px;padding-right:6px;float: right;" ng-if="!$root.createMode" data-ng-click="$root.initCreateNewNote()">
+            <btn class="fa fa-plus-circle fa-lg" style="color:green"></btn>
+            <span style="color: green;padding-left:4px" >add note</span>
+        </div>
+        <div class="add-file" style="padding-left:4px;padding-right:6px;float: right;" ng-if="$root.createMode">
+            <button class="btn btn-primary btn-block m0 br0 fr" ng-click="$root.createNewNote()" style="width:70px">Save </button>
+            <button class="btn btn-positive btn-block m0 br0 fr" ng-click="$root.cancelNoteCreateMode()" style="width:70px">Cancel </button>
+        </div>
+    </div>
+</div>
+<form class="bb1gray" ng-if="$root.createMode">
+    <div class="col-sm-3 col-xs-12 p0505 form-group mb15">
+        <fancy-select
+            header-text="Select note type" allow-empty='false' value="$root.newNote.typeObj" text="'Select...'" items="$root.notesTypes">
+        </fancy-select>
+    </div>
+    <div class="col-sm-8 col-xs-10 p0505 form-group bm0">
+        <input class="form-control crumbs-form-control" ng-model="$root.newNote.title" type="text" placeholder="Enter title" />
+    </div>
+    <div class="col-sm-1 col-xs-2 p0505 form-group bm0">
+       <i class="fa fa-microphone fa-2x"></i>
+    </div>
+    <div class="col-xs-12 p0505 form-group">
+        <textarea class="form-control" ng-model="$root.newNote.text" rows="3" placeholder="Type your note here..."></textarea>
+    </div>
+    <div class="clearfix"></div>
+</form>
+<ul class="table-view bm0" data-ng-repeat="n in $root.notes | filter: $root.typeFilter">
+    <li class="table-view-cell bb1gray text-left">
+        <p class="color-block bm0"><strong>{{n.title}}</strong></p>
+        <p class="color-block">{{n.note}}</p>
+        <p class="color-block bm0">Expires {{$root.formatDate(n.created)}}<span class="label label-default" style="float: right; margin-bottom: 10px;">{{$root.getNoteType(n.historyNoteTypeID)}}</span></p>
+        <div class="clearfix"></div>
+    </li>
+</ul>

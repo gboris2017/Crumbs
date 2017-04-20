@@ -1,0 +1,108 @@
+<div class="col-sm-2 col-xs-3">
+    <h6>Look for</h6>
+</div>
+<div class="col-sm-3 col-xs-9">
+    <fancy-select
+        header-text="Control list"
+        allow-empty='false'
+        value="vm.filters.partyType"
+        text="'Control list'"
+        items="vm.controlList">
+    </fancy-select>
+</div>
+<div class="clearfix"></div>
+<h4 class="pl15">Add filters:</h4>
+<div class="row"  style="-webkit-flex-wrap: wrap;flex-wrap: wrap;">
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(1)">
+    <fancy-select
+        header-text="State"
+        allow-empty='true'
+        value="vm.filters.states"
+        text="'State'"
+        items="vm.statesList"
+        multi-select="true"
+        auto-height="true"
+        pre-text="State: ">
+    </fancy-select>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(2)">
+    <fancy-select
+        header-text="Select roles"
+        allow-empty='true'
+        value="vm.filters.roles"
+        text="'Select roles'"
+        items="vm.rolesList"
+        multi-select="true"
+        auto-height="true"
+        pre-text="Role: ">
+    </fancy-select>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(3)">
+    <fancy-select
+        header-text="Owner"
+        allow-empty="true"
+        value="vm.filters.owners"
+        text="'Owner'"
+        items="vm.ownersList"
+        multi-select="true"
+        auto-height="true"
+        pre-text="Owner: ">
+    </fancy-select>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(4)">
+    <fancy-select
+        header-text="Status"
+        allow-empty="true"
+        value="vm.filters.statuses"
+        text="'Status'"
+        items="vm.statusesList"
+        multi-select="true"
+        auto-height="true"
+        pre-text="Status: ">
+    </fancy-select>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(5)">
+    <input class="crumbs-form-control" type="text" placeholder="Contains text" ng-model="vm.filters.containsText">
+</div>
+
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(6)">
+    <input class="crumbs-form-control" type="text" placeholder="Name" ng-model="vm.filters.name">
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(7)">
+    <i class="fa fa-2x cp" ng-class="vm.filters.hasLogin ? 'fa-check-square-o' : 'fa-square-o'" style="padding-top: 10px;padding-right: 5px;"
+       data-ng-click="vm.filters.hasLogin = !vm.filters.hasLogin"></i>
+    <span style="font-size: 20px;height: 34px;line-height: 34px;">Has login</span>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(8)">
+    <input class="crumbs-form-control" type="text" placeholder="Postcode" ng-model="vm.filters.postcode">
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(9)">
+    <div ion-datetime-picker date ng-model="vm.filters.lastActivity" style="font-size: 33px; border-bottom: 1px solid #ddd!important;">
+        <i class="icon ion-ios-calendar-outline positive" style="float: left;"></i>
+        <div data-ng-if="vm.filters.lastActivity" style="font-size: 16px;padding: 8px 0 0 30px;">{{vm.filters.lastActivity | date: 'yyyy-MM-dd'}}</div>
+        <div data-ng-if="!vm.filters.lastActivity" style="font-size: 16px;padding: 8px 0 0 30px;color:#ddd;">Start activity date</div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="col-md-2 col-sm-4 col-xs-12" ng-show="vm.showFilter(10)">
+    <div ion-datetime-picker date ng-model="vm.filters.lastAppDate" style="font-size: 33px; border-bottom: 1px solid #ddd!important;">
+        <i class="icon ion-ios-calendar-outline positive" style="float: left;"></i>
+        <div data-ng-if="vm.filters.lastAppDate" style="font-size: 16px;padding: 8px 0 0 30px;">{{vm.filters.lastAppDate | date: 'yyyy-MM-dd'}}</div>
+        <div data-ng-if="!vm.filters.lastAppDate" style="font-size: 16px;padding: 8px 0 0 30px;color:#ddd;">Last App Date Before</div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="col-md-2 col-sm-4 col-xs-12">
+    <fancy-select
+        header-text="More"
+        allow-empty="false"
+        value="vm.displayedFiltersList"
+        text="'More'"
+        items="vm.filtersList"
+        multi-select="true"
+        auto-height="true"
+        pre-text="Filter: ">
+    </fancy-select>
+</div>
+</div>

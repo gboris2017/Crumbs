@@ -1,0 +1,16 @@
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;font-size: 24px;padding-left: 15px;">Update Roles</h4>
+<div class="col-sm-6 col-xs-12"><a class="mb15" ng-click="$root.updateFromActiveDirectory()">Update from Active Directory</a></div>
+<div class="col-sm-6 col-xs-12"><a class="mb15" ng-click="$root.showManagePermissionsScreen()">Manage Role & Permission Types</a>
+</div>
+<div class="clearfix"></div>
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 5px;font-size: 24px;padding-left: 15px;">Existing roles</h4>
+<div class="col-sm-6 col-xs-12">
+    <div data-ng-repeat="r in $root.rolesItem.roles">
+        <h6 style="font-size: 14px; margin-bottom: 10px; font-weight: bold;">Application: {{r.ApplicationName}}</h6>
+        <p>{{r.RoleName}}</p>
+    </div>
+    <p data-ng-if="$root.rolesItem.roles.length == 0">No roles</p>
+</div>
+<div class="clearfix"></div>
+

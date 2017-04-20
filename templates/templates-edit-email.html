@@ -1,0 +1,191 @@
+<div class="col-sm-3 col-xs-12">
+    <input class="form-control crumbs-form-control" ng-model="vm.editTemplate.name" type="text"
+           placeholder="Template name">
+    <form ng-repeat="tag in vm.editTemplate.tags">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.editTemplate.tags, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <input class="form-control crumbs-form-control" ng-model="tag.name" type="text" placeholder="Enter tag">
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+             ng-click="vm.addElement(vm.editTemplate.tags)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a tag</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+
+
+    <form ng-repeat="ccc in vm.editTemplate.ownerList">
+
+    </form>
+
+    <div class="col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+        <fancy-select
+            header-text="Template owner"
+            allow-empty="true"
+            value="vm.editTemplate.owner.party.PartyRoleID"
+            text="'Template owner'"
+            items="vm.relationships"
+            search-box="true">
+        </fancy-select>
+    </div>
+    <div class="clearfix"></div>
+
+    <form ng-repeat="tag in vm.editTemplate.shares">
+        <div class="col-sm-2 col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.editTemplate.shares, tag.index)"></btn>
+        </div>
+        <div class="col-sm-10 col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <fancy-select
+                header-text="Select share"
+                allow-empty="true"
+                value="tag.party.PartyRoleID"
+                text="'Select share'"
+                items="vm.relationships"
+                search-box="true">
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-sm-2 col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px"
+             ng-click="vm.addElement(vm.editTemplate.shares)"></btn>
+    </div>
+    <div class="col-sm-10 col-xs-11 p0505"><span style="color:green">add a share</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <div class="checkbox crumbs-form-control" style="border-bottom-width: 0px !important;">
+        <label>
+            <input type="checkbox" ng-model="vm.editTemplate.canUseEdit"><span style="padding-left:5px">Anyone can use or edit</span>
+        </label>
+    </div>
+    <br/>
+    <div class="checkbox crumbs-form-control" style="border-bottom-width: 0px !important;">
+        <label>
+            <input type="checkbox" ng-model="vm.editTemplate.htmlContent"><span
+            style="padding-left:5px">HTML content</span>
+        </label>
+    </div>
+</div>
+<div class="col-sm-9 col-xs-12">
+    <form ng-repeat="tag in vm.editTemplate.emails">
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"  ng-click="vm.removeElement(vm.editTemplate.emails, tag.index)"></btn>
+        </div>
+        <div class="col-xs-3 p0505 form-group bm0">
+            <fancy-select
+                header-text="Select type"
+                allow-empty="false"
+                value="tag.type"
+                text="'Select type'"
+                items="vm.emailsTypesList">
+            </fancy-select>
+        </div>
+
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 1">
+            <input class="form-control crumbs-form-control" ng-model="tag.displayName" type="text" placeholder="Display name">
+        </div>
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 1">
+            <input class="form-control crumbs-form-control" ng-model="tag.emailAddress" type="text" placeholder="Recipient email address">
+        </div>
+
+        <div class="col-xs-3 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Email Type"
+                    allow-empty="false"
+                    value="tag.emailType"
+                    text="'Email type'"
+                    items="vm.emailTypes">
+            </fancy-select>
+        </div>
+        <div class="col-xs-2 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Location"
+                    allow-empty="false"
+                    value="tag.location"
+                    text="'Location'"
+                    items="vm.locationTypes">
+            </fancy-select>
+        </div>
+        <div class="col-xs-3 p0505 form-group bm0" data-ng-show="tag.type == 2">
+            <fancy-select
+                    header-text="Select Communication"
+                    allow-empty="false"
+                    value="tag.communication"
+                    text="'Communication'"
+                    items="vm.communicationTypes">
+            </fancy-select>
+        </div>
+
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 3">
+            <input class="form-control crumbs-form-control" ng-model="tag.displayName" type="text" placeholder="Display name property">
+        </div>
+        <div class="col-xs-4 p0505 form-group bm0" data-ng-show="tag.type == 3">
+            <input class="form-control crumbs-form-control" ng-model="tag.emailAddress" type="text" placeholder="Recipient email property">
+        </div>
+
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addEmail()"></btn>
+    </div>
+    <div class="col-xs-11 p0505"><span style="color:green">add an email</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <form ng-repeat="tag in vm.editTemplate.attachments">
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px"
+                 ng-click="vm.removeElement(vm.editTemplate.attachments, tag.index)"></btn>
+        </div>
+        <div class="col-xs-3 p0505 form-group bm0">
+            <fancy-select
+                header-text="Select type"
+                allow-empty="false"
+                value="tag.type"
+                text="'Select type'"
+                items="vm.attachmentsList">
+            </fancy-select>
+        </div>
+        <div class="col-xs-4 p0505 form-group bm0">
+            <input class="form-control crumbs-form-control" ng-model="tag.displayName" type="text"
+                   placeholder="Display name" ng-show="tag.type == 1">
+            <input class="form-control crumbs-form-control" ng-model="tag.displayName" type="text"
+                   placeholder="Display name" ng-show="tag.type == 2">
+            <fancy-select ng-show="tag.type == 3"
+                header-text="Select tag"
+                allow-empty="false"
+                value="tag.tag"
+                text="'Select tag'"
+                items="vm.tagsList">
+            </fancy-select>
+        </div>
+        <div class="col-xs-4 p0505 form-group bm0">
+            <input type="file" ngf-select="vm.uploadFile($files, tag)" ng-show="tag.type == 1" />
+            <input class="form-control crumbs-form-control" ng-model="tag.url" type="text"
+                   placeholder="URL/API with parameters" ng-show="tag.type == 2">
+            <fancy-select ng-show="tag.type == 3"
+                header-text="Select flyer"
+                allow-empty="false"
+                value="tag.flyer"
+                text="'Select flyer'"
+                items="vm.flyersList">
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="vm.addAttachment()"></btn>
+    </div>
+    <div class="col-xs-11 p0505"><span style="color:green">add an attachment</span></div>
+    <div class="clearfix"></div>
+    <div style="height:15px"></div>
+    <trix-editor angular-trix ng-model="vm.editTemplate.subject" style="height:100px"></trix-editor>
+    <div style="height:15px"></div>
+</div>
+<div class="clearfix"></div>

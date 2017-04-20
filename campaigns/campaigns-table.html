@@ -1,0 +1,15 @@
+<div class="col-xs-12" style="margin: 15px 0;">
+    <table ng-table="vm.tableParams" class="table table-bordered" show-filter="false" data-ng-show="$data.length > 0">
+        <tr ng-repeat="c in $data">
+            <td title="''" class="text-center">
+                <i class="fa cp" ng-class="c.selected ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="c.selected = !c.selected"></i>
+            </td>
+            <td title="'ID'" sortable="'PartyID'">{{c.PartyID}}</td>
+            <td title="'First Name'" sortable="'PartyName'"> {{c.PartyName}}</td>
+            <td title="'Email address'" sortable="'EmailAddress'"> {{c.EmailAddress}}</td>
+            <td title="'Fixed phone'" sortable="'WorkPhoneNumber'"> {{c.WorkPhoneNumber}}</td>
+            <td title="'Mobile phone'" sortable="'MobilePhoneNumber'"> {{c.MobilePhoneNumber}}</td>
+            <td title="'State'" sortable="'StateCode'"> {{c.StateCode}}</td>
+        </tr>
+    </table>
+</div>

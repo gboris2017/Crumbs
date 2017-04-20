@@ -1,0 +1,121 @@
+<div class="col-xs-12" data-ng-if="!vm.showImport"><h4>Settings</h4></div>
+<ion-list can-swipe="false" data-ng-if="!vm.showImport">
+    <ion-item class="item item-icon-left" ng-click="vm.showUploadBlock()" ng-swipe-left="vm.showImportBlock()">
+        <i class="icon icon-user"></i>
+        <h2>Upload from Spreadsheet</h2>
+    </ion-item>
+    <ion-item class="item item-icon-left" ng-if="vm.showUpload">
+        <div class="col-sm-4 col-xs-12">
+            <div class="numberCircle">1</div>
+            <div style="padding-top: 8px;">
+                <p style="color:black;"> What are you importing? </p>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <fancy-select
+                header-text="Select type"
+                allow-empty="false"
+                value="vm.data.importType"
+                text="'Select type'"
+                items="vm.importTypes">
+            </fancy-select>
+        </div>
+        <div class="col-sm-4 col-xs-12 pt5">
+            <a data-ng-if="vm.data.importType == 1" href="{{CONFIG.api.crumbs}}/settings/download/persons"> <i class="fa fa-download"></i> Download the spreadsheet template </a>
+            <a data-ng-if="vm.data.importType == 2" href="{{CONFIG.api.crumbs}}/settings/download/companies"> <i class="fa fa-download"></i> Download the spreadsheet template </a>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="col-sm-4 col-xs-12">
+            <div class="numberCircle">2</div>
+            <div style="padding-top: 8px;">
+                <p style="color:black;"> Who is the owner? </p>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <fancy-select
+                header-text="Select owner"
+                allow-empty="false"
+                value="vm.data.owner"
+                text="'Select owner'"
+                items="vm.ownersList"
+                search-box="true" >
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+        <form ng-submit="vm.uploadFile()">
+            <div class="col-sm-4 col-xs-12" style="margin-bottom: 10px;">
+                <div class="numberCircle">3</div>
+                <div style="padding-top: 8px;">
+                    <p style="color:black;"> Select your spreadsheet </p>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <input type="file" ngf-select="vm.onFileSelect($files)">
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-sm-4 col-xs-12" style="padding-bottom: 12px;">
+                <div class="numberCircle">4</div>
+                <div style="padding-top: 8px;">
+                    <p style="color:black;"> Validate your data </p>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <button type="submit" class="btn btn-default" >Validate</button>
+            </div>
+        </form>
+            <div class="clearfix"></div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="numberCircle">5</div>
+                <div style="padding-top: 8px;">
+                    <p style="color:black;"> Import your data </p>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <button class="btn btn-success">Import</button>
+                <button class="btn btn-danger" data-ng-click="vm.setDefaultState()">Cancel</button>
+            </div>
+        <div class="clearfix"></div>
+    </ion-item>
+</ion-list>
+<ion-list can-swipe="false" data-ng-if="!vm.showImport">
+    <ion-item class="item item-icon-left">
+        <i class="icon icon-user"></i>
+        <h2>More settings coming soon. Watch this space!</h2>
+    </ion-item>
+</ion-list>
+<div ng-include="'settings/settings-history.html'" data-ng-if="vm.showImport"  ng-swipe-right="vm.setDefaultState()"></div>
+
+<script id="validation-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">Validation</h1>
+            <button class="button button-clear button-positive" ng-click="vm.closeValidationModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content style="padding: 15px;">
+            {{vm.validationResult.errorsCount}}
+            <div class="col-sm-12 text-left" data-ng-if="vm.validationResult.errors.errorsCount > 0">
+                We've checked your file and found {{vm.validationResult.errors.errorsCount}} errors.
+                Download your list of errors by clicking below
+            </div>
+            <div class="col-sm-12 text-left" data-ng-if="vm.validationResult.errors.errorsCount == 0">
+                We've checked your file and haven't found any errors
+            </div>
+            <div class="col-sm-12 text-right">
+                <button class="br0 btn btn-default fl" style="margin-right: 10px;" ng-click="vm.getErrorsList()">Get my error list</button>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script id="errors-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">Errors List</h1>
+            <button class="button button-clear button-positive" ng-click="vm.closeErrorsModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content style="padding: 15px;">
+            <p data-ng-repeat="err in vm.validationResult.list"><strong>{{err.field}}</strong>: {{err.message}}</p>
+        </ion-content>
+    </ion-modal-view>
+</script>

@@ -1,0 +1,35 @@
+<ion-list can-swipe="false" ng-repeat="acc in vm.accounts">
+    <ion-item class="item item-icon-left" id="row_account_{{acc.PartyID}}"
+              on-swipe-left="vm.swipeLeft(acc, acc.PartyID)" on-swipe-right="vm.swipeRight(acc, acc.PartyID)">
+        <i data-ng-if="acc.logo == undefined" class="icon icon-user"></i>
+        <img class="icon" width="32" height="32" data-ng-if="acc.logo != undefined" ng-src="{{acc.logo}}" />
+        <h2>{{acc.PartyName}}</h2>
+        <p>{{acc.PartyRoleTypeName}}</p>
+        <ion-option-button class="button button-balanced" ng-if="!vm.editMode" ng-click="vm.initEditMode(acc)"> Edit </ion-option-button>
+        <ion-option-button class="button button-calm" ng-if="!vm.editMode" ng-click="vm.goToPrimaryContact(acc)"> Go To Primary Contact </ion-option-button>
+        <ion-option-button class="button button-assertive" ng-if="vm.editMode" ng-click="vm.closeEditMode()"> Cancel </ion-option-button>
+        <ion-option-button class="button button-balanced" ng-if="vm.editMode" ng-click="vm.saveAccount(acc)"> Save </ion-option-button>
+    </ion-item>
+    <ion-item class="item" ng-if="acc.editMode && vm.editMode">
+        <div ng-include="'accounts/account-details.view.html'"></div>
+    </ion-item>
+</ion-list>
+
+<ion-list delegate-handle="create-list" can-swipe="false">
+    <ion-item class="item" style="padding-left: 0px; border-bottom-width: 0px;">
+        <btn class="fa fa-plus-circle fa-lg pl10" style="color:green;line-height:22px;padding-right:10px" ng-click="vm.initAddNewMode()"></btn><span style="color:green">add an account</span>
+        <table style="position: absolute;right: 0;top:0;" data-ng-if="vm.addNewMode">
+            <tr>
+                <td>
+                    <button style="height: 55px;" class="button button-balanced btn-crumbs" data-ng-if="vm.addNewMode" ng-click="vm.saveNewAccount()"> Save </button>
+                </td>
+                <td>
+                    <button style="height: 55px;" class="button button-assertive btn-crumbs" data-ng-if="vm.addNewMode" ng-click="vm.closeAddNewMode()"> Cancel </button>
+                </td>
+            </tr>
+        </table>
+    </ion-item>
+    <ion-item class="item" ng-if="vm.addNewMode">
+        <div ng-include="'accounts/account-details.view.html'"></div>
+    </ion-item>
+</ion-list>

@@ -1,0 +1,19 @@
+<div class="col-sm-6 col-xs-12">
+    <input class="crumbs-form-control" ng-model="vm.editUser.givenname" type="text" placeholder="Enter first name">
+    <input class="crumbs-form-control" ng-model="vm.editUser.surname" type="text" placeholder="Enter last name">
+    <input class="crumbs-form-control" ng-model="vm.editUser.emailaddress" type="text" placeholder="Enter email">
+</div>
+<div class="col-sm-6 col-xs-12">
+    <div style="height: 5px;"></div>
+    <i class="fa cp" ng-class="vm.editUser.fmcSalesSupport ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="vm.editUser.fmcSalesSupport = !vm.editUser.fmcSalesSupport"></i>
+    <span style="padding-left: 10px;">FMC Sales Support</span>
+    <br/>
+    <div style="height: 30px;"></div>
+    <i class="fa cp" ng-class="vm.editUser.lcaSalesSupport ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="vm.editUser.lcaSalesSupport = !vm.editUser.lcaSalesSupport"></i>
+    <span style="padding-left: 10px;">LCA Sales Support</span>
+    <br/>
+    <div style="height: 30px;"></div>
+    <i class="fa cp" ng-class="vm.editUser.internalBdm ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="vm.editUser.internalBdm = !vm.editUser.internalBdm"></i>
+    <span style="padding-left: 10px;">Internal BDM</span>
+</div>
+<div class="clearfix"></div>

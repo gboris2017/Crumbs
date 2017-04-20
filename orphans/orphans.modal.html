@@ -1,0 +1,32 @@
+<ion-modal-view>
+    <ion-header-bar style="padding: 0px !important;">
+        <h1 class="title">Link to <span class="fr crumbs-cursor" ng-click="vm.closeLinkModal()">x</span></h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="col-xs-12" style="padding: 15px !important;">
+            <fancy-select
+                header-text="Select related party"
+                allow-empty="false"
+                value="vm.currentOrphan.rparty"
+                text="'Related party'"
+                items="vm.relatedParties"
+                search-box="true">
+            </fancy-select>
+            <fancy-select
+                header-text="Select relationship type"
+                allow-empty="false"
+                value="vm.currentOrphan.rtype"
+                text="'Relationship type'"
+                items="vm.relationshipTypes"
+                search-box="false">
+            </fancy-select>
+            <p data-ng-if="vm.currentOrphan.contact">OR</p>
+            <i data-ng-if="vm.currentOrphan.contact" class="fa" ng-class="vm.currentOrphan.noRelationship ? 'fa-check-square-o' : 'fa-square-o'"
+               data-ng-click="vm.currentOrphan.noRelationship = !vm.currentOrphan.noRelationship"></i>
+            <span data-ng-if="vm.currentOrphan.contact">No relationship needed</span>
+        </div>
+    </ion-content>
+    <ion-footer-bar>
+        <button class="btn btn-success" style="float: right" ng-click="vm.saveLink(modal.orphan)">Save</button>
+    </ion-footer-bar>
+</ion-modal-view>

@@ -1,0 +1,18 @@
+<div class="col-xs-12" id="templatesController"><h4>Templates</h4></div>
+<ion-list can-swipe="false" ng-repeat="tt in vm.templateTypes">
+    <ion-item id="row_template_{{tt.id}}" class="item item-icon-left"
+              on-swipe-left="vm.swipeLeft(tt, tt.id)" on-swipe-right="vm.swipeRight(tt, tt.id)">
+        <i class="icon icon-user"></i>
+        <h2>{{tt.name}}</h2>
+        <ion-option-button id="btn_new_templates_{{tt.id}}" class="button button-calm" ng-show="!vm.newMode" ng-click="vm.newTemplate(tt)"> New </ion-option-button>
+        <ion-option-button class="button button-assertive" ng-show="tt.newMode && vm.newMode" ng-click="vm.closeOptions(tt)"> Cancel </ion-option-button>
+        <ion-option-button class="button button-balanced" ng-show="tt.newMode && vm.newMode" ng-click="vm.saveTemplate(tt)"> Save </ion-option-button>
+    </ion-item>
+    <ion-item class="item" ng-if="tt.newMode && tt.newMode">
+        <div ng-if="tt.type == 1" ng-include="'templates/templates-edit-email.html'"></div>
+        <div ng-if="tt.type == 2" ng-include="'templates/templates-edit-sms.html'"></div>
+        <div ng-if="tt.type == 3" ng-include="'templates/templates-edit-flyer.html'"></div>
+    </ion-item>
+</ion-list>
+
+

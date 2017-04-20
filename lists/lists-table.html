@@ -1,0 +1,32 @@
+<div class="col-sm-2 col-sm-offset-8  col-xs-6" style="cursor: pointer;" data-ng-click="vm.runList()">
+    <div style="float:left;color:green;">
+        <span class="fa fa-caret-right fa-2x"></span>
+    </div>
+    <div style="padding-left: 10px; padding-top: 2px; color: green;float:left;">
+        <span>run my list</span>
+    </div>
+</div>
+<div class="col-sm-2  col-xs-6" ng-click="vm.openSaveModal()" style="cursor: pointer;">
+    <div style="float:left;color:green;">
+        <span class="fa fa-save fa-2x"></span>
+    </div>
+    <div style="padding-left: 10px; padding-top: 2px; color: green;float:left;">
+        <span>save my list</span>
+    </div>
+</div>
+
+<div class="col-xs-12" style="margin: 15px 0;" data-ng-show="vm.list && vm.list.length > 0">
+    <table ng-table="vm.tableParams" class="table table-bordered" show-filter="false">
+        <tr ng-repeat="c in $data">
+            <td title="''" class="text-center">
+                <i class="fa cp" ng-class="c.selected ? 'fa-check-square-o' : 'fa-square-o'" data-ng-click="c.selected = !c.selected"></i>
+            </td>
+            <td title="'ID'" sortable="'PartyID'">{{c.PartyID}}</td>
+            <td title="'First Name'" sortable="'PartyName'"> {{c.PartyName}}</td>
+            <td title="'Email address'" sortable="'EmailAddress'"> {{c.EmailAddress}}</td>
+            <td title="'Fixed phone'" sortable="'WorkPhoneNumber'"> {{c.WorkPhoneNumber}}</td>
+            <td title="'Mobile phone'" sortable="'MobilePhoneNumber'"> {{c.MobilePhoneNumber}}</td>
+            <td title="'State'" sortable="'StateCode'"> {{c.StateCode}}</td>
+        </tr>
+    </table>
+</div>

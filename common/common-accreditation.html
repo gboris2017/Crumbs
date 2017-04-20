@@ -1,0 +1,157 @@
+<div class="col-xs-12 text-center"><h4>Accreditation</h4></div>
+
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Accreditation"
+        allow-empty="false"
+        value="$root.accreditation.status"
+        text="'Accreditation'"
+        items="$root.accreditationStatuses"
+        search="false">
+    </fancy-select>
+    <fancy-select
+        header-text="Ranking"
+        allow-empty="false"
+        value="$root.accreditation.ranking"
+        text="'Ranking'"
+        items="$root.accreditationRankings"
+        search="false">
+    </fancy-select>
+    <input class="form-control crumbs-form-control br0" type="text" placeholder="Account ID" ng-model="$root.accreditation.accountId" style="height:34px">
+</div>
+<div class="clearfix"></div>
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Professional Indemnity Insurance</h4>
+<div class="col-sm-6 col-xs-12">
+    <fancy-select
+        header-text="Insurer Name"
+        allow-empty="false"
+        value="$root.accreditation.insurer"
+        text="'Insurer Name'"
+        items="$root.accreditationInsurers"
+        search="true">
+    </fancy-select>
+    <input class="form-control crumbs-form-control br0" type="text" placeholder="Policy Number"
+           ng-model="$root.accreditation.policyNumber" style="height:34px">
+    <input class="form-control crumbs-form-control br0" type="text" placeholder="Cover amount"
+           ng-model="$root.accreditation.coverAmount" style="height:34px">
+    <form ng-repeat="comp in $root.accreditation.relatedInsuredCompanies">
+        <div class="col-xs-1 p0505">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="$root.removeRelatedInsuredCompany(comp.id)"></btn>
+        </div>
+        <div class="col-xs-11 p0505 form-group bm0" style="padding-right: 0px">
+            <fancy-select
+                header-text="Related insured company"
+                allow-empty="false"
+                value="comp"
+                text="'Related insured company'"
+                items="$root.relatedInsuredCompaniesList"
+                search="true">
+            </fancy-select>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="$root.addRelatedInsuredCompany()"></btn>
+    </div>
+    <div class="col-xs-11 p0505 text-left"><span style="color:green">add related insured company</span></div>
+    <div class="clearfix"></div>
+</div>
+<div class="col-sm-6 col-xs-12">
+    <div ion-datetime-picker ng-model="$root.accreditation.policyDate">
+        <input class="crumbs-form-control" type="text" placeholder="Policy Date" ng-model="$root.accreditation.policyDate"/>
+    </div>
+    <div ion-datetime-picker ng-model="$root.accreditation.expiryDate">
+        <input class="crumbs-form-control" type="text" placeholder="Expiry Date" ng-model="$root.accreditation.expiryDate"/>
+    </div>
+    <div ion-datetime-picker ng-model="$root.accreditation.cocSuppliedDate">
+        <input class="crumbs-form-control" type="text" placeholder="COC Supplied Date" ng-model="$root.accreditation.cocSuppliedDate"/>
+    </div>
+    <div ion-datetime-picker ng-model="$root.accreditation.expiryEmailSentDate">
+        <input class="crumbs-form-control" type="text" placeholder="Expiry email sent" ng-model="$root.accreditation.expiryEmailSentDate"/>
+    </div>
+    <div ion-datetime-picker ng-model="$root.accreditation.confirmRequestedDate">
+        <input class="crumbs-form-control" type="text" placeholder="Confirm requested" ng-model="$root.accreditation.confirmRequestedDate"/>
+    </div>
+    <div ion-datetime-picker ng-model="$root.accreditation.confirmReceivedDate">
+        <input class="crumbs-form-control" type="text" placeholder="Confirm received" ng-model="$root.accreditation.confirmReceivedDate"/>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Registrations and Compliance</h4>
+
+<div class="col-sm-12 col-xs-12">
+    <form ng-repeat="reg in $root.accreditation.registrations">
+        <div class="col-xs-1 col-sm-1 p0505 text-left">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="$root.removeAccreditationRegistration(reg.id)"></btn>
+        </div>
+        <div class="col-xs-5 col-sm-3 p0505 form-group bm0">
+            <fancy-select
+                header-text="Reg type"
+                allow-empty="false"
+                value="reg.type"
+                text="'Reg type'"
+                items="$root.accreditationRegistrationsTypes"
+                search="false">
+            </fancy-select>
+        </div>
+        <div class="col-xs-6 col-sm-4 p0505 form-group bm0">
+            <input class="form-control crumbs-form-control" ng-model="reg.number" type="text" placeholder="Reg. Number" style="height:34px">
+        </div>
+        <div class="col-xs-12 col-sm-4 p0505 form-group bm0">
+            <div ion-datetime-picker ng-model="reg.expiryDate1">
+                <input class="crumbs-form-control" type="text" placeholder="Expiry Date" ng-model="reg.expiryDate1"/>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505 text-left">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="$root.addAccreditationRegistration()"></btn>
+    </div>
+    <div class="col-xs-11 p0505 text-left"><span style="color:green">add registration</span></div>
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+<h4 class="text-left" style="margin-top: 30px; margin-bottom: 15px;">Bank Accounts</h4>
+
+<div class="col-sm-12 col-xs-12">
+    <form ng-repeat="bank in $root.accreditation.bankAccounts">
+        <div class="col-xs-1 col-sm-1 p0505 text-left">
+            <btn class="fa fa-minus-circle fa-lg" style="color:red;line-height:32px" ng-click="$root.removeAccreditationAccount(bank.id)"></btn>
+        </div>
+        <div class="col-xs-5 col-sm-3 p0505 form-group bm0">
+            <fancy-select
+                header-text="Acc type"
+                allow-empty="false"
+                value="bank.accountType"
+                text="'Acc type'"
+                items="$root.accreditationAccountTypes"
+                search="false">
+            </fancy-select>
+        </div>
+        <div class="col-xs-6 col-sm-3 p0505 form-group bm0">
+            <fancy-select
+                header-text="BSB"
+                allow-empty="false"
+                value="bank.bsb"
+                text="'BSB'"
+                items="$root.bsbList"
+                search="true">
+            </fancy-select>
+        </div>
+        <div class="col-xs-6 col-sm-2 p0505 form-group bm0">
+            <input class="form-control crumbs-form-control" ng-model="bank.accountNumber" type="text" placeholder="Acc num" style="height:34px">
+        </div>
+        <div class="col-xs-6 col-sm-3 p0505 form-group bm0">
+            <input class="form-control crumbs-form-control" ng-model="bank.accountName" type="text" placeholder="Acc name" style="height:34px">
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="col-xs-1 p0505 text-left">
+        <btn class="fa fa-plus-circle fa-lg" style="color:green;line-height:22px" ng-click="$root.addAccreditationAccount()"></btn>
+    </div>
+    <div class="col-xs-11 p0505 text-left"><span style="color:green">add bank account</span></div>
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
